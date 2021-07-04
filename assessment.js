@@ -38,11 +38,12 @@ assessmentButton.onclick = () => { // アロー関数
     const paragraph = document.createElement('p'); // pタグを新しく作る
     // assessment関数を実行して、pタグに診断結果を設定
     const result = assessment(userName);
-    paragraph.innerText = result;
+    paragraph.innerText = result[0]; // resultは配列。0:診断結果文、1:画像表示のためのindex番号
     resultDivided.appendChild(paragraph); // pタグを診断結果表示エリアに追加
 
     const img = document.createElement('img');
-    img.setAttribute('src', 'pose_pien_uruuru_woman.png');
+    const index = result[1];
+    img.setAttribute('src', images[index]);
     resultDivided.appendChild(img); // imgタグを診断結果表示エリアに追加
 
     // ▼▼▼ ツイートエリアの作成 ▼▼▼
@@ -85,6 +86,27 @@ const answers = [
     '{userName}のいいところはその全てです。ありのままの{userName}自身がいいところなのです。',
     '{userName}のいいところは自制心です。やばいと思ったときにしっかりと衝動を抑えられる{userName}が皆から評価されています。'
 ];
+
+var img = [];
+const images = [
+    img[0] = 'onepiece01_luffy.png',
+    img[1] = 'onepiece02_zoro_bandana.png',
+    img[2] = 'onepiece03_nami.png',
+    img[3] = 'onepiece04_usopp_sogeking.png',
+    img[4] = 'onepiece05_sanji.png',
+    img[5] = 'onepiece06_chopper.png',
+    img[6] = 'onepiece07_robin.png',
+    img[7] = 'onepiece08_franky.png',
+    img[8] = 'onepiece09_brook.png',
+    img[9] = 'onepiece10_jinbe.png',
+    img[10] = 'onepiece11_arlong.png',
+    img[11] = 'onepiece12_buggy.png',
+    img[12] = 'onepiece13_crocodile.png',
+    img[13] = 'onepiece14_enel.png',
+    img[14] = 'onepiece15_lucci.png',
+    img[15] = 'onepiece16_moria.png',
+];
+
 /**
  * 名前の文字列を渡すと診断結果を返す関数
  * @param {string} userName ユーザーの名前
@@ -100,9 +122,10 @@ function assessment(userName) {
     // 文字のコード番号の合計を回答の数で割って添字の数値を求める
     const index = sumOfCharCode % answers.length; // 16で割った余りで、0~15の間の数値になる
     let result = answers[index];
-    result = result.replaceAll('{userName}',userName);
-    return result; // 診断結果
+    result = result.replaceAll('{userName}',userName); // {userName}をユーザーの名前に置き換える
+    return [result, index]; // 診断結果 画像を表示させるためにindex番号が欲しい
 }
+
 
 // 「診断結果の文言の特定の部分を名前に置き換える処理」のテスト
 console.assert(
@@ -118,6 +141,3 @@ console.assert(
 );
 
 console.log(assessment('真代'));
-
-
-
