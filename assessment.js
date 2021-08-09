@@ -106,6 +106,7 @@ const images = [
     img[13] = 'onepiece14_enel.png',
     img[14] = 'onepiece15_lucci.png',
     img[15] = 'onepiece16_moria.png',
+    img[16] = 'onepiece17_doflamingo.png'
 ];
 
 /**
